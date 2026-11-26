@@ -1,0 +1,133 @@
+{
+  "common": {
+    "email": "E-Mail",
+    "save": "Speichern",
+    "logout": "Abmelden",
+    "back": "Zurück",
+    "loading": "Lädt …",
+    "error": "Es ist ein Fehler aufgetreten."
+  },
+  "errors": {
+    "offline": "Keine Verbindung zum Server. Bitte prüfe deine Internetverbindung.",
+    "signedOut": "Du bist nicht mehr angemeldet. Bitte melde dich erneut an.",
+    "forbidden": "Dazu fehlt die Berechtigung."
+  },
+  "nav": {
+    "main": "Hauptnavigation",
+    "dashboard": "Übersicht",
+    "events": "Termine",
+    "members": "Mitglieder",
+    "myRegion": "Meine Region",
+    "myRides": "Fahrten",
+    "account": "Mein Konto",
+    "feedback": "Kummerkasten",
+    "admin": "Verwaltung",
+    "wpAdmin": "Vereinsverwaltung (WordPress)",
+    "menu": "Menü",
+    "website": "Zur Website"
+  },
+  "dashboard": {
+    "welcome": "Willkommen, {name}",
+    "region": "Region",
+    "squad": "Squad",
+    "noSquad": "Kein Squad",
+    "roles": "Funktionen",
+    "noRoles": "Mitglied",
+    "deputy": "Stellvertretung",
+    "myEvents": "Meine nächsten Termine",
+    "noMyEvents": "Du bist zu keinem kommenden Termin angemeldet.",
+    "newestEvents": "Neueste Termine",
+    "noEvents": "Keine kommenden Termine.",
+    "allEvents": "Alle Termine",
+    "tasks": "Anstehende Aufgaben",
+    "noTasks": "Gerade gibt es nichts zu erledigen."
+  },
+  "roles": {
+    "overall_lead": "Gesamtleitung",
+    "regional_lead": "Regionalleitung",
+    "squad_lead": "Squadleader"
+  },
+  "soon": {
+    "events": "Termine",
+    "rides": "Fahrgemeinschaften",
+    "feedback": "Kummerkasten",
+    "text": "Dieser Bereich wird gerade aufgebaut und folgt mit einem der nächsten Updates."
+  },
+  "members": {
+    "search": "Suche (Name, Callsign, Squad)",
+    "none": "Keine Mitglieder gefunden.",
+    "notFound": "Dieses Mitglied gibt es nicht oder du darfst es nicht sehen.",
+    "number": "Mitgliedsnummer",
+    "contact": "Kontakt",
+    "noContact": "Keine freigegebenen Kontaktdaten."
+  },
+  "account": {
+    "profile": "Stammdaten",
+    "contact": "E-Mail & Kontakt",
+    "mobility": "Mobilität",
+    "security": "Sicherheit",
+    "noRecord": "Für dieses Konto gibt es noch keine Mitgliedsdaten. Die Leitung legt sie beim Aufnehmen an.",
+    "emailHint": "E-Mail-Adresse und Passwort änderst du in deinem WordPress-Profil:",
+    "wpProfile": "Profil öffnen",
+    "phoneAndSocial": "Telefon und Social Media",
+    "socialPrivacy": "Diese Angaben sehen nur du und deine Leitung, solange du sie nicht freigibst. Sie sind optional.",
+    "shareTitle": "Für andere Mitglieder sichtbar machen",
+    "sharePhone": "Meine Telefonnummer anderen Mitgliedern zeigen",
+    "shareEmail": "Meine E-Mail-Adresse anderen Mitgliedern zeigen"
+  },
+  "security": {
+    "info": "Passwort und Zwei-Faktor-Anmeldung verwaltest du in deinem WordPress-Profil.",
+    "open": "Sicherheitseinstellungen öffnen",
+    "required": "Für deine Funktion ist die Zwei-Faktor-Anmeldung Pflicht. Bis sie eingerichtet ist, ruhen deine Leitungsrechte."
+  },
+  "profile": {
+    "personal": "Persönliche Daten",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "nickname": "Spitzname / Callsign",
+    "phone": "Telefon",
+    "address": "Anschrift",
+    "street": "Straße und Hausnummer",
+    "postalCode": "PLZ",
+    "city": "Ort",
+    "country": "Land (Kürzel)",
+    "birthDate": "Geburtsdatum",
+    "leadOnly": "Änderungen nur über die Leitung",
+    "saved": "Gespeichert.",
+    "playProfile": "Spielprofil",
+    "combatRole": "Rolle im Gefecht",
+    "playStyle": "Art",
+    "notSpecified": "Keine Angabe",
+    "roles": { "shooter": "Schütze", "driver": "Fahrer", "sniper": "Sniper", "lone_fighter": "Einzelkämpfer" },
+    "styles": { "reenactment": "Reenactment", "militia": "Miliz", "independent": "Ungebunden" },
+    "nameDisplay": {
+      "title": "Mein Name für andere Mitglieder",
+      "info": "Squadleader und Regionalleitung, die für dich zuständig sind, sehen immer deinen vollen Namen.",
+      "full": "Vollständiger Name",
+      "abbreviated": "Nachname abgekürzt",
+      "nickname": "Nur mein Spitzname",
+      "needNickname": "Du hast noch keinen Spitznamen eingetragen. Bis dahin wird der Nachname abgekürzt."
+    }
+  },
+  "avatar": {
+    "title": "Profilfoto",
+    "choose": "Foto hochladen",
+    "remove": "Entfernen",
+    "hint": "JPG, PNG oder WebP, bis 5 MB. Das Foto wird quadratisch zugeschnitten und ist für deine Region und deine Leitung sichtbar."
+  },
+  "notifications": {
+    "title": "Benachrichtigungen",
+    "none": "Noch nichts Neues.",
+    "readAll": "Alle gelesen"
+  },
+  "mobility": {
+    "info": "Diese Angaben helfen bei der Planung von Fahrgemeinschaften. Sie sind nur für dich und deine Leitung sichtbar.",
+    "canDrive": "Ich kann andere im Auto mitnehmen",
+    "seats": "Freie Plätze (ohne mich)",
+    "vehicle": "Fahrzeug",
+    "vehicleHint": "z. B. Kombi, Platz für Ausrüstung",
+    "needsRide": "Ich brauche in der Regel eine Mitfahrgelegenheit",
+    "notes": "Anmerkung",
+    "notesHint": "z. B. nur ab Hannover, Raucher/Nichtraucher"
+  }
+}

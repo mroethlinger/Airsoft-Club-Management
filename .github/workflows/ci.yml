@@ -48,6 +48,8 @@ jobs:
         with: { node-version: '22' }
       - run: npm ci --no-audit --no-fund
         working-directory: app
+      - run: npm test
+        working-directory: app
       - run: npm run build
         working-directory: app
       - run: bash bin/build-zip.sh

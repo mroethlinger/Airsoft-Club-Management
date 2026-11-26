@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+/*
+ * Theme colours come from the club settings: the PHP template prints them on :root and the app
+ * updates them from /session. The values below are only fallbacks.
+ */
+:root {
+  --c-primary: #a4c639;
+  --c-primary-contrast: #111111;
+  --c-background: #121411;
+  --c-surface: #1c1f1a;
+  --c-text: #e9ecdf;
+}
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, 'Segoe UI', Roboto, sans-serif;
+  --color-primary: var(--c-primary);
+  --color-primary-contrast: var(--c-primary-contrast);
+  --color-background: var(--c-background);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-text);
+}
+
+body {
+  background: var(--c-background);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+}
+
+.btn {
+  @apply rounded-md bg-primary px-4 py-2 font-semibold text-primary-contrast transition hover:brightness-110 disabled:opacity-50;
+}
+
+.btn-ghost {
+  @apply rounded-md border border-white/20 px-4 py-2 transition hover:bg-white/10;
+}
+
+.field {
+  @apply w-full rounded-md border border-white/20 bg-black/30 px-3 py-2 text-ink outline-none focus:border-primary;
+}
+
+.card {
+  @apply rounded-xl bg-surface p-6 shadow-lg;
+}

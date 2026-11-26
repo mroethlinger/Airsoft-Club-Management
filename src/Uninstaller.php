@@ -21,12 +21,13 @@ final class Uninstaller {
 	 *
 	 * @var string[]
 	 */
-	private const OPTIONS = array( Settings::OPTION, Migrator::OPTION, Roles::OPTION, 'acm_version', 'acm_rights_matrix' );
+	private const OPTIONS = array( Settings::OPTION, Migrator::OPTION, Roles::OPTION, 'acm_version', 'acm_rights_matrix', 'acm_app_page_id', 'acm_app_rewrite' );
 
 	/** Runs the uninstall. Returns whether data was removed. */
 	public static function run(): bool {
 		delete_transient( 'acm_github_release' );
 		wp_clear_scheduled_hook( 'acm_purge_former_members' );
+		wp_clear_scheduled_hook( 'acm_prune_notifications' );
 		if ( '1' !== Settings::get( 'remove_data' ) ) {
 			return false;
 		}

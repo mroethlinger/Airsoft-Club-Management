@@ -15,6 +15,9 @@ use AirsoftClub\Database\Migrator;
 use AirsoftClub\Members\MemberService;
 use AirsoftClub\Members\Privacy;
 use AirsoftClub\Rest\MembersController;
+use AirsoftClub\Rest\SessionController;
+use AirsoftClub\Notifications\Notifications;
+use AirsoftClub\Front\AppPage;
 use AirsoftClub\Settings\Branding;
 use AirsoftClub\Updater\GitHubUpdater;
 
@@ -47,6 +50,9 @@ final class Plugin {
 		MemberService::hooks();
 		Privacy::hooks();
 		MembersController::hooks();
+		SessionController::hooks();
+		Notifications::hooks();
+		AppPage::hooks();
 		if ( is_admin() ) {
 			Menu::hooks();
 		}
@@ -58,6 +64,9 @@ final class Plugin {
 			Migrator::run();
 		}
 		Roles::maybe_upgrade();
+		if ( ! get_option( AppPage::OPTION ) ) {
+			AppPage::ensure_page();
+		}
 		if ( get_option( 'acm_version' ) !== AIRSOFT_CLUB_VERSION ) {
 			update_option( 'acm_version', AIRSOFT_CLUB_VERSION, false );
 		}
@@ -72,6 +81,7 @@ final class Plugin {
 	public static function activate(): void {
 		Migrator::run();
 		Roles::install();
+		AppPage::ensure_page();
 		update_option( 'acm_version', AIRSOFT_CLUB_VERSION, false );
 	}
 
@@ -79,6 +89,9 @@ final class Plugin {
 	public static function deactivate(): void {
 		delete_transient( 'acm_github_release' );
 		wp_clear_scheduled_hook( MemberService::PURGE_HOOK );
+		wp_clear_scheduled_hook( Notifications::PRUNE_HOOK );
+		delete_option( 'acm_app_rewrite' );
+		flush_rewrite_rules( false );
 	}
 
 	/** Whether boot() already ran (for tests). */

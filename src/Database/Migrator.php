@@ -23,6 +23,7 @@ final class Migrator {
 		return array(
 			new Migrations\M001_Core(),
 			new Migrations\M002_Members(),
+			new Migrations\M003_Notifications(),
 		);
 	}
 
@@ -73,6 +74,6 @@ final class Migrator {
 	 * @return string[]
 	 */
 	public static function tables(): array {
-		return array_map( array( self::class, 'table' ), array( 'members', 'role_assignments', 'squads', 'regions', 'audit_log' ) );
+		return array_map( array( self::class, 'table' ), array( 'notifications', 'members', 'role_assignments', 'squads', 'regions', 'audit_log' ) );
 	}
 }

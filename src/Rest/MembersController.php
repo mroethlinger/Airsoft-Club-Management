@@ -157,7 +157,7 @@ final class MembersController {
 		foreach ( MemberService::visible_members( $viewer ) as $member ) {
 			$card = MemberService::card( $member, $viewer );
 			if ( $card ) {
-				$cards[] = $card;
+				$cards[] = self::present( $card, $member );
 			}
 		}
 		return new WP_REST_Response( array( 'data' => $cards ) );
@@ -175,7 +175,20 @@ final class MembersController {
 		if ( ! $card ) {
 			return new WP_Error( 'acm_not_found', __( 'Member not found.', 'airsoft-club-management' ), array( 'status' => 404 ) );
 		}
-		return new WP_REST_Response( array( 'data' => $card ) );
+		return new WP_REST_Response( array( 'data' => self::present( $card, $member ) ) );
+	}
+
+	/**
+	 * Adds the avatar URL to a card and keeps "social" a JSON object.
+	 *
+	 * @param array<string,mixed> $card   Card.
+	 * @param object              $member Member.
+	 * @return array<string,mixed>
+	 */
+	public static function present( array $card, object $member ): array {
+		$card['avatar_url'] = $member->avatar_path ? SessionController::avatar_url( $member->user_id, (string) $member->avatar_path ) : null;
+		$card['social']     = (object) $card['social'];
+		return $card;
 	}
 
 	/**
