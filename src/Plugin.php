@@ -34,9 +34,9 @@ final class Plugin {
 		}
 		self::$booted = true;
 
-		self::upgrade();
-
-		add_action( 'init', array( self::class, 'load_textdomain' ) );
+		// Upgrade on init (not earlier): role labels are translated and translations load on init.
+		add_action( 'init', array( self::class, 'load_textdomain' ), 1 );
+		add_action( 'init', array( self::class, 'upgrade' ), 2 );
 		add_action( 'deleted_user', array( Assignments::class, 'delete_user' ) );
 		TwoFactor::hooks();
 		Branding::hooks();

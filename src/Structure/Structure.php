@@ -7,6 +7,7 @@
 
 namespace AirsoftClub\Structure;
 
+use AirsoftClub\Access\Assignments;
 use AirsoftClub\Audit\AuditLog;
 use AirsoftClub\Database\Migrator;
 use WP_Error;
@@ -222,16 +223,9 @@ final class Structure {
 			return new WP_Error( 'acm_in_use', __( 'This region is still in use.', 'airsoft-club-management' ) );
 		}
 		global $wpdb;
-		$wpdb->delete(
-			Migrator::table( 'role_assignments' ),
-			array(
-				'scope_type' => 'region',
-				'scope_id'   => $id,
-			),
-			array( '%s', '%d' )
-		);
 		$wpdb->delete( Migrator::table( 'regions' ), array( 'id' => $id ), array( '%d' ) );
 		self::flush();
+		Assignments::delete_scope( 'region', $id );
 		AuditLog::add( 'region.deleted', 'region', $id );
 		do_action( 'airsoft_club_structure_changed' );
 		return true;
@@ -317,16 +311,9 @@ final class Structure {
 			return new WP_Error( 'acm_in_use', __( 'This squad still has members.', 'airsoft-club-management' ) );
 		}
 		global $wpdb;
-		$wpdb->delete(
-			Migrator::table( 'role_assignments' ),
-			array(
-				'scope_type' => 'squad',
-				'scope_id'   => $id,
-			),
-			array( '%s', '%d' )
-		);
 		$wpdb->delete( Migrator::table( 'squads' ), array( 'id' => $id ), array( '%d' ) );
 		self::flush();
+		Assignments::delete_scope( 'squad', $id );
 		AuditLog::add( 'squad.deleted', 'squad', $id );
 		do_action( 'airsoft_club_structure_changed' );
 		return true;

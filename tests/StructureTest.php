@@ -94,6 +94,7 @@ class StructureTest extends WP_UnitTestCase {
 		Structure::delete_region( $region );
 		Assignments::flush();
 		$this->assertSame( array(), Assignments::stored_for( $user ) );
+		$this->assertNotContains( 'acm_lead', get_userdata( $user )->roles, 'marker role removed' );
 	}
 
 	public function test_deleted_user_loses_assignments(): void {

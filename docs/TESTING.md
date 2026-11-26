@@ -22,3 +22,7 @@ One-time setup on the VM (not automated, done by the owner):
 3. WordPress core must exist at `ACM_WP_PATH` (default `/var/www/acm`, the test site; tests use their own database and table prefix `acmtests_`).
 
 `bin/vm-bootstrap-tests.sh` then downloads the matching test library into `/tmp/acm-wordpress-tests-lib` on first run.
+
+## Test site
+
+The test VM serves a WordPress test site at `http://acm.test.lan` (vhost `acm.conf`, document root `/var/www/acm`, database `acm_wp`, debug log on, search engines blocked). `bash bin/vm-deploy.sh` builds the app and the ZIP on the VM and installs it there. Admin credentials live only on the VM in `~/acm-admin.txt`.

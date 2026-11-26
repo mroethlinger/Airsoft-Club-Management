@@ -226,6 +226,30 @@ final class Assignments {
 	}
 
 	/**
+	 * Removes all assignments bound to a deleted region or squad and re-syncs the marker role.
+	 *
+	 * @param string $scope_type "region" or "squad".
+	 * @param int    $scope_id   Scope id.
+	 */
+	public static function delete_scope( string $scope_type, int $scope_id ): void {
+		global $wpdb;
+		$table    = Migrator::table( 'role_assignments' );
+		$user_ids = $wpdb->get_col( $wpdb->prepare( "SELECT DISTINCT user_id FROM {$table} WHERE scope_type = %s AND scope_id = %d", $scope_type, $scope_id ) );
+		$wpdb->delete(
+			$table,
+			array(
+				'scope_type' => $scope_type,
+				'scope_id'   => $scope_id,
+			),
+			array( '%s', '%d' )
+		);
+		self::flush();
+		foreach ( $user_ids as $user_id ) {
+			self::sync_marker_role( (int) $user_id );
+		}
+	}
+
+	/**
 	 * Removes all assignments of a deleted user.
 	 *
 	 * @param int $user_id User id.
