@@ -20,6 +20,7 @@ final class Menu {
 		add_action( 'admin_init', array( SettingsPage::class, 'register_setting' ) );
 		StructurePage::hooks();
 		RightsPage::hooks();
+		MembersPage::hooks();
 	}
 
 	/** Adds the menu entries. */
@@ -34,6 +35,7 @@ final class Menu {
 			26
 		);
 		add_submenu_page( self::SLUG, __( 'Rights', 'airsoft-club-management' ), __( 'Rights', 'airsoft-club-management' ), 'acm_view_rights', self::SLUG, array( RightsPage::class, 'render' ) );
+		add_submenu_page( self::SLUG, __( 'Members', 'airsoft-club-management' ), __( 'Members', 'airsoft-club-management' ), 'acm_manage_structure', 'acm-members', array( MembersPage::class, 'render' ) );
 		add_submenu_page( self::SLUG, __( 'Structure', 'airsoft-club-management' ), __( 'Regions & squads', 'airsoft-club-management' ), 'acm_manage_structure', 'acm-structure', array( StructurePage::class, 'render' ) );
 		add_submenu_page( self::SLUG, __( 'Settings', 'airsoft-club-management' ), __( 'Settings', 'airsoft-club-management' ), 'acm_manage_settings', 'acm-settings', array( SettingsPage::class, 'render' ) );
 		add_submenu_page( self::SLUG, __( 'Audit log', 'airsoft-club-management' ), __( 'Audit log', 'airsoft-club-management' ), 'acm_view_audit', 'acm-audit', array( AuditPage::class, 'render' ) );

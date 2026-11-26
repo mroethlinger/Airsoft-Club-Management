@@ -73,6 +73,40 @@ class MembersTest extends WP_UnitTestCase {
 		$this->assertStringNotContainsString( 'Last', $user->display_name, 'display name does not expose the last name' );
 	}
 
+	public function test_create_sends_set_password_invitation(): void {
+		reset_phpmailer_instance();
+		$id     = $this->new_member( $this->north );
+		$mailer = tests_retrieve_phpmailer_instance();
+		$mail   = $mailer->get_sent();
+		$this->assertSame( get_userdata( $id )->user_email, $mail->to[0][0] );
+		$this->assertStringContainsString( 'action=rp', $mail->body );
+		reset_phpmailer_instance();
+		MemberService::create(
+			$this->admin,
+			array(
+				'email'       => 'quiet@example.org',
+				'first_name'  => 'Q',
+				'last_name'   => 'Uiet',
+				'region_id'   => $this->north,
+				'send_invite' => false,
+			)
+		);
+		$this->assertFalse( tests_retrieve_phpmailer_instance()->get_sent() );
+	}
+
+	public function test_admin_members_page_renders(): void {
+		$this->new_member( $this->north, $this->alpha );
+		wp_set_current_user( $this->admin );
+		ob_start();
+		try {
+			\AirsoftClub\Admin\MembersPage::render();
+		} finally {
+			$html = (string) ob_get_clean();
+		}
+		$this->assertStringContainsString( 'acm_member_create', $html );
+		$this->assertStringContainsString( 'acm_member_leave', $html );
+	}
+
 	public function test_create_rights_follow_scope(): void {
 		$data = array(
 			'email'      => 'new@example.org',

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Phase 2 – Members (core)
+- Member records linked to WordPress users, sequential membership numbers, adults only.
+- Profile rules ported from the Laravel app (name display, contact sharing, address, social/ASVZ, mobility, combat role, play style).
+- Leads manage members in their scope; move between regions/squads; end membership and reactivate.
+- Player card and member list filtered by viewer; former members archive with daily purge after 90 days.
+- Invitation by WordPress set-password mail; admin page "Members"; privacy exporter and eraser.
+- Not yet: avatars, consent documents, fee tiers (phase 9), member area UI (phase 3).
+
 ### Phase 1 â€“ Foundation
 - Numbered migrations (`acm_db_version`), core tables: audit log, regions, squads, role assignments.
 - WordPress roles: club member, club lead (marker), board, treasurer, cash auditor.

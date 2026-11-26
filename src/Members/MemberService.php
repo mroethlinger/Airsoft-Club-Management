@@ -215,6 +215,10 @@ final class MemberService {
 				'squad_id'  => $squad_id,
 			)
 		);
+		if ( ! isset( $data['send_invite'] ) || $data['send_invite'] ) {
+			// WordPress core mail with a link to set the password (no password is ever sent).
+			wp_new_user_notification( $user_id, null, 'user' );
+		}
 		do_action( 'airsoft_club_member_created', $user_id, $actor_id );
 		return $user_id;
 	}
