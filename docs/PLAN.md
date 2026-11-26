@@ -31,7 +31,7 @@ The new plugin is **independent**: it does not require Kita-Verein or the Larave
 
 | # | Decision |
 |---|---|
-| D1 | Plugin slug `airsoft-club-management`, namespace `AirsoftClub`, text domain `airsoft-club-management`, table prefix `{wp}acm_`, capability prefix `acm_`, option prefix `acm_`, REST namespace `acm/v1`. |
+| D1 | Plugin slug `airsoft-club-management`, namespace `AirsoftClub`, text domain `airsoft-club-management`, table prefix `{wp}acm_`, capability prefix `acm_`, option prefix `acm_`, REST namespace `acm/v1`. Global PHP constants and functions use `AIRSOFT_CLUB_` / `airsoft_club_` (wordpress.org rejects prefixes shorter than four characters for globals). |
 | D2 | PHP ≥ 8.1, WordPress ≥ 6.4, MySQL ≥ 8.0 or MariaDB ≥ 10.6. Developed on PHP 8.4 / WP 6.x / MariaDB 11.8. |
 | D3 | Repository root = plugin folder. Release ZIP built by GitHub Actions on `v*` tags; tests, `bin/`, `docs/` and front-end sources are excluded from the ZIP, built assets are included. |
 | D4 | No Composer on the server. Own PSR-4 autoloader. Third-party PHP libraries that must ship (e.g. Web Push) are bundled under a prefixed namespace (PHP-Scoper) to avoid conflicts with other plugins. |

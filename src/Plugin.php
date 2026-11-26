@@ -12,7 +12,11 @@ defined( 'ABSPATH' ) || exit;
 /** Central entry point: activation, deactivation and hook registration. */
 final class Plugin {
 
-	/** Whether boot() already ran. */
+	/**
+	 * Whether boot() already ran.
+	 *
+	 * @var bool
+	 */
 	private static bool $booted = false;
 
 	/** Runs on plugins_loaded. */
@@ -26,12 +30,12 @@ final class Plugin {
 
 	/** Loads translations from languages/. */
 	public static function load_textdomain(): void {
-		load_plugin_textdomain( 'airsoft-club-management', false, dirname( plugin_basename( ACM_FILE ) ) . '/languages' );
+		load_plugin_textdomain( 'airsoft-club-management', false, dirname( plugin_basename( AIRSOFT_CLUB_FILE ) ) . '/languages' );
 	}
 
 	/** Runs on plugin activation. Migrations follow in phase 1. */
 	public static function activate(): void {
-		update_option( 'acm_version', ACM_VERSION, false );
+		update_option( 'acm_version', AIRSOFT_CLUB_VERSION, false );
 	}
 
 	/** Runs on plugin deactivation. Data is kept. */

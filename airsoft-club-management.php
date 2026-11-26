@@ -17,13 +17,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ACM_VERSION', '0.0.1' );
-define( 'ACM_FILE', __FILE__ );
-define( 'ACM_DIR', plugin_dir_path( __FILE__ ) );
-define( 'ACM_URL', plugin_dir_url( __FILE__ ) );
+define( 'AIRSOFT_CLUB_VERSION', '0.0.1' );
+define( 'AIRSOFT_CLUB_FILE', __FILE__ );
+define( 'AIRSOFT_CLUB_DIR', plugin_dir_path( __FILE__ ) );
+define( 'AIRSOFT_CLUB_URL', plugin_dir_url( __FILE__ ) );
 
-require_once ACM_DIR . 'src/Autoloader.php';
-AirsoftClub\Autoloader::register( ACM_DIR . 'src/' );
+require_once AIRSOFT_CLUB_DIR . 'src/Autoloader.php';
+AirsoftClub\Autoloader::register( AIRSOFT_CLUB_DIR . 'src/' );
 
 register_activation_hook( __FILE__, array( AirsoftClub\Plugin::class, 'activate' ) );
 register_deactivation_hook( __FILE__, array( AirsoftClub\Plugin::class, 'deactivate' ) );

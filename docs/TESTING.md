@@ -19,6 +19,6 @@ One-time setup on the VM (not automated, done by the owner):
 
 1. Create an empty throw-away database `acm_wp_test` and a user with rights on it.
 2. Write `~/acm-db.env` with `DB_USER=... DB_PASS=...` (never committed).
-3. WordPress core must exist at `ACM_WP_PATH` (default `/var/www/kita`, only the core files are used; the tests use their own database and table prefix `acmtests_`).
+3. WordPress core must exist at `ACM_WP_PATH` (default `/var/www/acm`, the test site; tests use their own database and table prefix `acmtests_`).
 
 `bin/vm-bootstrap-tests.sh` then downloads the matching test library into `/tmp/acm-wordpress-tests-lib` on first run.

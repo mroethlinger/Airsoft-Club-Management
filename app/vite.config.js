@@ -9,7 +9,7 @@ export default defineConfig({
   build: {
     outDir: fileURLToPath(new URL('../assets/app', import.meta.url)),
     emptyOutDir: true,
-    manifest: true,
+    manifest: 'manifest.json',
     rollupOptions: { input: fileURLToPath(new URL('./src/main.js', import.meta.url)) },
   },
 });

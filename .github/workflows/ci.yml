@@ -46,11 +46,16 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      - run: npm install --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
         working-directory: app
       - run: npm run build
         working-directory: app
       - run: bash bin/build-zip.sh
+      - name: ZIP contains built app and no dev files
+        run: |
+          L=$(unzip -Z1 build/airsoft-club-management.zip)
+          grep -q 'assets/app/manifest.json' <<< "$L"
+          ! grep -qE '/(tests|bin|docs|app|vendor|node_modules)/' <<< "$(sed 's#^airsoft-club-management/assets/app/#X/#' <<< "$L")"
       - uses: actions/upload-artifact@v4
         with: { name: plugin-zip, path: build/airsoft-club-management.zip }
 

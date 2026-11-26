@@ -3,7 +3,7 @@
 # Uses its own library folder and its own throw-away database (acm_wp_test), separate from other projects.
 set -euo pipefail
 LIB="${WP_TESTS_DIR:-/tmp/acm-wordpress-tests-lib}"
-WP_PATH="${ACM_WP_PATH:-/var/www/kita}"
+WP_PATH="${ACM_WP_PATH:-/var/www/acm}"
 [ -f "$LIB/wp-tests-config.php" ] && exit 0
 
 # shellcheck disable=SC1090

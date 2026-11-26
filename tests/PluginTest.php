@@ -11,8 +11,8 @@ use AirsoftClub\Plugin;
 class PluginTest extends WP_UnitTestCase {
 
 	public function test_constants_are_defined(): void {
-		$this->assertTrue( defined( 'ACM_VERSION' ) );
-		$this->assertFileExists( ACM_FILE );
+		$this->assertTrue( defined( 'AIRSOFT_CLUB_VERSION' ) );
+		$this->assertFileExists( AIRSOFT_CLUB_FILE );
 	}
 
 	public function test_autoloader_loads_plugin_class(): void {
@@ -28,11 +28,11 @@ class PluginTest extends WP_UnitTestCase {
 	public function test_activation_stores_version(): void {
 		delete_option( 'acm_version' );
 		Plugin::activate();
-		$this->assertSame( ACM_VERSION, get_option( 'acm_version' ) );
+		$this->assertSame( AIRSOFT_CLUB_VERSION, get_option( 'acm_version' ) );
 	}
 
 	public function test_header_version_matches_constant(): void {
-		$data = get_file_data( ACM_FILE, array( 'Version' => 'Version' ) );
-		$this->assertSame( ACM_VERSION, $data['Version'] );
+		$data = get_file_data( AIRSOFT_CLUB_FILE, array( 'Version' => 'Version' ) );
+		$this->assertSame( AIRSOFT_CLUB_VERSION, $data['Version'] );
 	}
 }

@@ -15,7 +15,7 @@ jobs:
           test "v$V" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME != plugin version $V"; exit 1; }
       - uses: actions/setup-node@v4
         with: { node-version: '22' }
-      - run: npm install --no-audit --no-fund && npm run build
+      - run: npm ci --no-audit --no-fund && npm run build
         working-directory: app
       - run: bash bin/build-zip.sh
       - uses: softprops/action-gh-release@v2

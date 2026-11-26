@@ -20,6 +20,6 @@
 		<properties><property name="text_domain" type="array"><element value="airsoft-club-management"/></property></properties>
 	</rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-		<properties><property name="prefixes" type="array"><element value="acm"/><element value="AirsoftClub"/></property></properties>
+		<properties><property name="prefixes" type="array"><element value="airsoft_club"/><element value="AirsoftClub"/></property></properties>
 	</rule>
 </ruleset>
