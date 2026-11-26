@@ -15,9 +15,23 @@
 		<!-- PSR-4 file names (Plugin.php) instead of class-plugin.php. -->
 		<exclude name="WordPress.Files.FileName"/>
 	</rule>
+	<!-- Club data lives in own tables (acm_*): direct queries are intended. Table names are interpolated
+	     from Migrator::table(); every value must still go through $wpdb->prepare(). -->
+	<rule ref="WordPress.DB.DirectDatabaseQuery.DirectQuery"><severity>0</severity></rule>
+	<rule ref="WordPress.DB.DirectDatabaseQuery.NoCaching"><severity>0</severity></rule>
+	<rule ref="WordPress.DB.PreparedSQL.InterpolatedNotPrepared"><severity>0</severity></rule>
+	<rule ref="WordPress.DB.DirectDatabaseQuery.SchemaChange">
+		<exclude-pattern>/uninstall.php</exclude-pattern>
+	</rule>
 	<rule ref="PHPCompatibilityWP"/>
 	<rule ref="WordPress.WP.I18n">
 		<properties><property name="text_domain" type="array"><element value="airsoft-club-management"/></property></properties>
+	</rule>
+	<rule ref="WordPress.WP.Capabilities">
+		<properties><property name="custom_capabilities" type="array">
+			<element value="acm_member_area"/><element value="acm_manage_settings"/><element value="acm_manage_structure"/>
+			<element value="acm_manage_rights"/><element value="acm_view_rights"/><element value="acm_view_audit"/>
+		</property></properties>
 	</rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties><property name="prefixes" type="array"><element value="airsoft_club"/><element value="AirsoftClub"/></property></properties>
