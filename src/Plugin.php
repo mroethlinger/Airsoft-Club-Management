@@ -14,6 +14,7 @@ use AirsoftClub\Admin\Menu;
 use AirsoftClub\Database\Migrator;
 use AirsoftClub\Members\MemberService;
 use AirsoftClub\Members\Privacy;
+use AirsoftClub\Rest\MembersController;
 use AirsoftClub\Settings\Branding;
 use AirsoftClub\Updater\GitHubUpdater;
 
@@ -45,6 +46,7 @@ final class Plugin {
 		GitHubUpdater::hooks();
 		MemberService::hooks();
 		Privacy::hooks();
+		MembersController::hooks();
 		if ( is_admin() ) {
 			Menu::hooks();
 		}

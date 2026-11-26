@@ -29,6 +29,7 @@ final class MemberService {
 		add_filter( 'airsoft_club_region_in_use', array( self::class, 'region_in_use' ), 10, 2 );
 		add_filter( 'airsoft_club_squad_in_use', array( self::class, 'squad_in_use' ), 10, 2 );
 		add_filter( 'airsoft_club_regions_for', array( self::class, 'own_region' ), 10, 4 );
+		add_action( 'delete_user', array( Avatars::class, 'on_delete_user' ) );
 		add_action( 'deleted_user', array( MemberRepository::class, 'delete' ) );
 		add_action( self::PURGE_HOOK, array( self::class, 'purge_expired' ) );
 		add_action( 'init', array( self::class, 'schedule' ) );
@@ -466,17 +467,17 @@ final class MemberService {
 		if ( $viewer_id <= 0 || ! user_can( $viewer_id, 'acm_member_area' ) ) {
 			return null;
 		}
-		$is_self = $viewer_id === $member->user_id;
-		$manages = self::manages( $viewer_id, $member );
-		if ( MemberRepository::STATUS_ACTIVE !== $member->status && ! $manages ) {
+		if ( ! self::can_view( $viewer_id, $member ) ) {
 			return null;
 		}
-		$region = Structure::region( $member->region_id );
-		$squad  = self::active_squad( $member );
-		$squad  = $squad ? Structure::squad( $squad ) : null;
-		$parts  = self::display_parts( $member, $viewer_id );
-		$user   = get_userdata( $member->user_id );
-		$card   = array(
+		$is_self = $viewer_id === $member->user_id;
+		$manages = self::manages( $viewer_id, $member );
+		$region  = Structure::region( $member->region_id );
+		$squad   = self::active_squad( $member );
+		$squad   = $squad ? Structure::squad( $squad ) : null;
+		$parts   = self::display_parts( $member, $viewer_id );
+		$user    = get_userdata( $member->user_id );
+		$card    = array(
 			'id'            => $member->user_id,
 			'first_name'    => $parts['first'],
 			'last_name'     => $parts['last'],
@@ -517,11 +518,46 @@ final class MemberService {
 	 * @return object[]
 	 */
 	public static function visible_members( int $viewer_id ): array {
+		$regions = self::visible_regions( $viewer_id );
+		return null === $regions ? MemberRepository::list() : MemberRepository::list( $regions );
+	}
+
+	/**
+	 * Whether the viewer may see the member at all: themself, their leads, and active members of the regions
+	 * the viewer belongs to or leads. Former members are visible only to their leads.
+	 *
+	 * @param int    $viewer_id Viewer.
+	 * @param object $member    Member.
+	 */
+	public static function can_view( int $viewer_id, object $member ): bool {
+		if ( $viewer_id <= 0 || ! user_can( $viewer_id, 'acm_member_area' ) ) {
+			return false;
+		}
+		if ( $viewer_id === $member->user_id && MemberRepository::STATUS_ACTIVE === $member->status ) {
+			return true;
+		}
+		if ( self::manages( $viewer_id, $member ) ) {
+			return true;
+		}
+		if ( MemberRepository::STATUS_ACTIVE !== $member->status ) {
+			return false;
+		}
+		$regions = self::visible_regions( $viewer_id );
+		return null === $regions || in_array( $member->region_id, $regions, true );
+	}
+
+	/**
+	 * Regions whose active members the viewer may see; null means all.
+	 *
+	 * @param int $viewer_id Viewer.
+	 * @return int[]|null
+	 */
+	public static function visible_regions( int $viewer_id ): ?array {
 		if ( $viewer_id <= 0 || ! user_can( $viewer_id, 'acm_member_area' ) ) {
 			return array();
 		}
 		if ( Access::max_level( $viewer_id ) >= Abilities::OVERALL_LEAD ) {
-			return MemberRepository::list();
+			return null;
 		}
 		$regions = array();
 		$own     = MemberRepository::find( $viewer_id );
@@ -535,7 +571,7 @@ final class MemberService {
 				$regions[] = (int) Structure::region_of_squad( $a->scope_id );
 			}
 		}
-		return MemberRepository::list( array_filter( $regions ) );
+		return array_values( array_unique( array_filter( $regions ) ) );
 	}
 
 	/**

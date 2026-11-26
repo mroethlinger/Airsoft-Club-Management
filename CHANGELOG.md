@@ -8,7 +8,9 @@
 - Leads manage members in their scope; move between regions/squads; end membership and reactivate.
 - Player card and member list filtered by viewer; former members archive with daily purge after 90 days.
 - Invitation by WordPress set-password mail; admin page "Members"; privacy exporter and eraser.
-- Not yet: avatars, consent documents, fee tiers (phase 9), member area UI (phase 3).
+- Avatars in a private folder (re-encoded JPEG, max. 512 px, random names), delivered only after the visibility check.
+- REST `acm/v1`: `/me` (read, update), `/members`, `/members/{id}`, `/members/{id}/avatar` (get, upload, delete).
+- Not yet: consent documents, fee tiers (phase 9), member area UI (phase 3).
 
 ### Phase 1 – Foundation
 - Numbered migrations (`acm_db_version`), core tables: audit log, regions, squads, role assignments.
