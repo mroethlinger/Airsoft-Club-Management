@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<phpunit bootstrap="tests/bootstrap.php" colors="true" convertWarningsToExceptions="true" convertNoticesToExceptions="true">
+	<testsuites>
+		<testsuite name="airsoft-club-management">
+			<directory suffix="Test.php">tests</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

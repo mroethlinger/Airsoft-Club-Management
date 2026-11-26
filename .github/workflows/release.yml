@@ -1,0 +1,23 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check tag matches plugin version
+        run: |
+          V=$(grep -oP "Version:\s*\K[0-9.]+" airsoft-club-management.php)
+          test "v$V" = "$GITHUB_REF_NAME" || { echo "Tag $GITHUB_REF_NAME != plugin version $V"; exit 1; }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - run: npm install --no-audit --no-fund && npm run build
+        working-directory: app
+      - run: bash bin/build-zip.sh
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: build/airsoft-club-management.zip
