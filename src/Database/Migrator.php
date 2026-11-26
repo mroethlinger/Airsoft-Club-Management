@@ -22,6 +22,7 @@ final class Migrator {
 	public static function migrations(): array {
 		return array(
 			new Migrations\M001_Core(),
+			new Migrations\M002_Members(),
 		);
 	}
 
@@ -72,6 +73,6 @@ final class Migrator {
 	 * @return string[]
 	 */
 	public static function tables(): array {
-		return array_map( array( self::class, 'table' ), array( 'role_assignments', 'squads', 'regions', 'audit_log' ) );
+		return array_map( array( self::class, 'table' ), array( 'members', 'role_assignments', 'squads', 'regions', 'audit_log' ) );
 	}
 }

@@ -26,6 +26,7 @@ final class Uninstaller {
 	/** Runs the uninstall. Returns whether data was removed. */
 	public static function run(): bool {
 		delete_transient( 'acm_github_release' );
+		wp_clear_scheduled_hook( 'acm_purge_former_members' );
 		if ( '1' !== Settings::get( 'remove_data' ) ) {
 			return false;
 		}

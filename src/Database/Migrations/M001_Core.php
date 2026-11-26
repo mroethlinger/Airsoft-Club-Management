@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
 
 /** Foundation schema (phase 1). */
 final class M001_Core implements Migration {
- // phpcs:ignore PEAR.NamingConventions.ValidClassName.Invalid
 
 	/** Version number. */
 	public function version(): int {

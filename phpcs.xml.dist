@@ -23,6 +23,10 @@
 	<rule ref="WordPress.DB.DirectDatabaseQuery.SchemaChange">
 		<exclude-pattern>/uninstall.php</exclude-pattern>
 	</rule>
+	<!-- Migration classes are named M001_Name so they sort by version. -->
+	<rule ref="PEAR.NamingConventions.ValidClassName.Invalid">
+		<exclude-pattern>/src/Database/Migrations/*</exclude-pattern>
+	</rule>
 	<rule ref="PHPCompatibilityWP"/>
 	<rule ref="WordPress.WP.I18n">
 		<properties><property name="text_domain" type="array"><element value="airsoft-club-management"/></property></properties>

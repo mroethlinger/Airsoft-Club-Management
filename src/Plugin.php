@@ -12,6 +12,8 @@ use AirsoftClub\Access\Roles;
 use AirsoftClub\Access\TwoFactor;
 use AirsoftClub\Admin\Menu;
 use AirsoftClub\Database\Migrator;
+use AirsoftClub\Members\MemberService;
+use AirsoftClub\Members\Privacy;
 use AirsoftClub\Settings\Branding;
 use AirsoftClub\Updater\GitHubUpdater;
 
@@ -41,6 +43,8 @@ final class Plugin {
 		TwoFactor::hooks();
 		Branding::hooks();
 		GitHubUpdater::hooks();
+		MemberService::hooks();
+		Privacy::hooks();
 		if ( is_admin() ) {
 			Menu::hooks();
 		}
@@ -72,6 +76,7 @@ final class Plugin {
 	/** Runs on plugin deactivation. Data and roles are kept. */
 	public static function deactivate(): void {
 		delete_transient( 'acm_github_release' );
+		wp_clear_scheduled_hook( MemberService::PURGE_HOOK );
 	}
 
 	/** Whether boot() already ran (for tests). */
